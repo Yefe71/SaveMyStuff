@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309008862944",
+    "project_id": "savemystuff-app",
+    "storage_bucket": "savemystuff-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309008862944:android:8711be8bb4959790a80a85",
+        "android_client_info": {
+          "package_name": "com.codingwithme.notesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309008862944-stc0i841j8gs6fbqnmah5oas4ihm6nct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9brUDVzjiPoCZatnW6zWJgPSaQvnjabQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309008862944-stc0i841j8gs6fbqnmah5oas4ihm6nct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
