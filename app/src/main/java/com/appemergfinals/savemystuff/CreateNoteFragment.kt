@@ -16,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.appemergfinals.savemystuff.database.NotesDatabase
 import com.appemergfinals.savemystuff.entities.Notes
@@ -66,6 +67,7 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Check if the storage permission has been granted
 
         if (noteId != -1){
 
@@ -356,26 +358,27 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
 
 
     private fun readStorageTask(){
-        if (hasReadStoragePerm()){
-
-
-            pickImageFromGallery()
-        }else{
+        val perms = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (!EasyPermissions.hasPermissions(requireContext(), *perms)) {
+            // If the storage permission has not been granted, request it
             EasyPermissions.requestPermissions(
-                requireActivity(),
-                getString(R.string.storage_permission_text),
+                this,
+                "This app needs access to your device's storage to select an image from the gallery.",
                 READ_STORAGE_PERM,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                *perms
             )
+        } else {
+            // If the storage permission has already been granted, open the gallery
+            openGallery()
         }
     }
 
     private fun pickImageFromGallery(){
-        var intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        if (intent.resolveActivity(requireActivity().packageManager) != null){
-            startActivityForResult(intent,REQUEST_CODE_IMAGE)
-        }
+    openGallery()
     }
+
+
+
 
     private fun getPathFromUri(contentUri: Uri): String? {
         var filePath:String? = null
@@ -436,8 +439,19 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        if (requestCode == READ_STORAGE_PERM) {
+            // If the storage permission has been granted, open the gallery
+            openGallery()
+        }
 
     }
+    fun openGallery() {
+        // Create an Intent to open the gallery
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        // Start the Intent
+        startActivityForResult(intent, REQUEST_CODE_IMAGE)
+    }
+
 
     override fun onRationaleDenied(requestCode: Int) {
 
