@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.codingwithme.notesapp"
+        applicationId "com.appemergfinals.savemystuff"
         minSdkVersion 22
         targetSdkVersion 31
         versionCode 1
