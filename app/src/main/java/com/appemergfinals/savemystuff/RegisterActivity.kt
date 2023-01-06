@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
         fragmentTransition.add(R.id.frame_layout,fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }
 
-    private fun performSignUp(savedInstanceState: Bundle?) {
+    private fun performSignUp(savedInstanceState: Bundle?){
         val email = findViewById<EditText>(R.id.editText_email_register)
         val password = findViewById<EditText>(R.id.editText_password_register)
 
@@ -67,14 +67,16 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, move to next activity -> Activity Main-HomeFragment
                     // This is what I tried to do (I copied the code from MainActivity), but it still didnt work.
+
+
+
                     Toast.makeText(baseContext,
                         "Authentication Success.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
 
-                    super.onCreate(savedInstanceState)
-                    setContentView(R.layout.activity_main)
-                    replaceFragment(HomeFragment.newInstance(),true)
 
 
                 } else {
